@@ -15,6 +15,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
+#include <CoreLib/Rendering/RenderFunctions.h>
 #include <CoreLib/World/WorldFunctions.h>
 
 // Define own pointer to the API
@@ -37,9 +38,6 @@ MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
 MODULE_API void Module_Startup(void) {
   // Hook pointer to the API
   HookSymbolAPI();
-
-  // Display patch version
-  CPrintF("^c00ff00  Plugin runs on a %s patch!\n", GetAPI()->GetVersion());
 };
 
 // Module cleanup
@@ -68,9 +66,9 @@ MODULE_API void Module_Step(void) {
   }
 };
 
-MODULE_API void Module_Draw(CDrawPort *pdp) {
+MODULE_API void Module_PostDraw(CDrawPort *pdp) {
   // Display current simulation time
-  FLOAT fScaling = (FLOAT)pdp->GetHeight() / 480.0f;
+  const FLOAT fScaling = HEIGHT_SCALING(pdp);
 
   pdp->SetFont(_pfdDisplayFont);
   pdp->SetTextScaling(fScaling);
@@ -79,4 +77,19 @@ MODULE_API void Module_Draw(CDrawPort *pdp) {
   strTime.PrintF("Current time: %s", TimeToString(_pTimer->GetLerpedCurrentTick()));
 
   pdp->PutText(strTime, 16 * fScaling, 32 * fScaling, 0xFFFFFFFF);
+};
+
+MODULE_API void Module_Frame(CDrawPort *pdp) {
+  // Display patch version in menu
+  if (GetGameAPI()->IsGameOn()) return;
+
+  const FLOAT fScaling = HEIGHT_SCALING(pdp);
+
+  pdp->SetFont(_pfdDisplayFont);
+  pdp->SetTextScaling(fScaling);
+
+  CTString strVersion;
+  strVersion.PrintF("^c00ff00Plugin runs on a %s patch!\n", GetAPI()->GetVersion());
+
+  pdp->PutText(strVersion, 16 * fScaling, 32 * fScaling, 0xFFFFFFFF);
 };
