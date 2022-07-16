@@ -15,11 +15,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
-#include <CoreLib/Interfaces/RenderFunctions.h>
-#include <CoreLib/Interfaces/WorldFunctions.h>
-
 // Define own pointer to the API
 CCoreAPI *_pCoreAPI = NULL;
+
+// Plugin event handlers
+static IProcessingEvents _evProcessing;
+static IRenderingEvents _evRendering;
 
 // Retrieve module information
 MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
@@ -38,58 +39,13 @@ MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
 MODULE_API void Module_Startup(void) {
   // Hook pointer to the API
   HookSymbolAPI();
+  
+  // Register plugin events
+  _evProcessing.Register();
+  _evRendering.Register();
 };
 
 // Module cleanup
 MODULE_API void Module_Shutdown(void) {
   InfoMessage("Example plugin shutdown!");
-};
-
-MODULE_API void Module_Step(void) {
-  // Call every second
-  if (ULONG(_pTimer->CurrentTick() / _pTimer->TickQuantum) % 20 != 0) {
-    return;
-  }
-
-  CPlayerEntities cen;
-  IWorld::GetLocalPlayers(cen);
-
-  // Decrease health of each local player if it's higher than 50
-  FOREACHINDYNAMICCONTAINER(cen, CPlayerEntity, iten) {
-    CPlayerEntity *pen = iten;
-
-    if (pen == NULL) continue;
-
-    if (pen->GetHealth() > 50) {
-      pen->SetHealth(pen->GetHealth() - 1);
-    }
-  }
-};
-
-MODULE_API void Module_PostDraw(CDrawPort *pdp) {
-  // Display current simulation time
-  const FLOAT fScaling = HEIGHT_SCALING(pdp);
-
-  pdp->SetFont(_pfdDisplayFont);
-  pdp->SetTextScaling(fScaling);
-
-  CTString strTime;
-  strTime.PrintF("Current time: %s", TimeToString(_pTimer->GetLerpedCurrentTick()));
-
-  pdp->PutText(strTime, 16 * fScaling, 32 * fScaling, 0xFFFFFFFF);
-};
-
-MODULE_API void Module_Frame(CDrawPort *pdp) {
-  // Display patch version in menu
-  if (GetGameAPI()->IsGameOn()) return;
-
-  const FLOAT fScaling = HEIGHT_SCALING(pdp);
-
-  pdp->SetFont(_pfdDisplayFont);
-  pdp->SetTextScaling(fScaling);
-
-  CTString strVersion;
-  strVersion.PrintF("^c00ff00Plugin runs on a %s patch!\n", GetAPI()->GetVersion());
-
-  pdp->PutText(strVersion, 16 * fScaling, 32 * fScaling, 0xFFFFFFFF);
 };
