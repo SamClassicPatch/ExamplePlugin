@@ -48,4 +48,8 @@ MODULE_API void Module_Startup(void) {
 // Module cleanup
 MODULE_API void Module_Shutdown(void) {
   InfoMessage("Example plugin shutdown!");
+
+  // Unregister plugin events
+  _evProcessing.Unregister();
+  _evRendering.Unregister();
 };
