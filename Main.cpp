@@ -22,6 +22,11 @@ CCoreAPI *_pCoreAPI = NULL;
 static IProcessingEvents _evProcessing;
 static IRenderingEvents _evRendering;
 
+// Dummy chat command
+static void DummyChatCommand(CTString &strResult, const CTString &strArguments) {
+  strResult.PrintF("Dummy command arguments: '%s'", strArguments);
+};
+
 // Retrieve module information
 MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
   // Used API and utility
@@ -43,11 +48,15 @@ MODULE_API void Module_Startup(void) {
   // Register plugin events
   _evProcessing.Register();
   _evRendering.Register();
+
+  // Add custom chat command
+  GetPluginAPI()->RegisterChatCommand("dummy", &DummyChatCommand);
 };
 
 // Module cleanup
 MODULE_API void Module_Shutdown(void) {
-  InfoMessage("Example plugin shutdown!");
+  // Remove custom chat command
+  GetPluginAPI()->UnregisterChatCommand("dummy");
 
   // Unregister plugin events
   _evProcessing.Unregister();
