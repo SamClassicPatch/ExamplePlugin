@@ -29,9 +29,8 @@ static void DummyChatCommand(CTString &strResult, const CTString &strArguments) 
 
 // Retrieve module information
 MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
-  // Used API and utility
-  pInfo->apiVer = CORE_API_VERSION;
-  pInfo->ulFlags = CPluginAPI::PF_ENGINE | CPluginAPI::PF_GAME;
+  // Utility flags
+  pInfo->SetUtility(CPluginAPI::PF_ENGINE | CPluginAPI::PF_GAME);
 
   // Metadata
   pInfo->strAuthor = "Dreamy Cecil";
