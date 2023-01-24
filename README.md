@@ -1,6 +1,6 @@
 # Example Plugin
 
-This is an example of how user plugins can be made for the Serious Sam Classics patch.
+This is an example of how user plugins can be made for Serious Sam Classics Patch.
 
 Visit [Serious Sam Classics Patch](https://github.com/SamClassicPatch) organization for more information.
 
