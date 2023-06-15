@@ -15,45 +15,39 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
-#include <CoreLib/Interfaces/RenderFunctions.h>
-#include <CoreLib/Interfaces/WorldFunctions.h>
-
 // Define processing events for the plugin
 
 void IProcessingEvents::OnStep(void)
 {
-  // Call every second
-  if (ULONG(_pTimer->CurrentTick() / _pTimer->TickQuantum) % 20 != 0) {
-    return;
-  }
+  // Call once every second
+  if (ULONG(_pTimer->CurrentTick() * 20) % 20 != 0) return;
 
-  CPlayerEntities cen;
-  IWorld::GetLocalPlayers(cen);
+  // Find all player entities
+  CEntities cen;
+  IWorld::FindClasses(IWorld::GetWorld()->wo_cenEntities, cen, "PlayerEntity");
 
-  // Decrease health of each local player if it's higher than 50
-  FOREACHINDYNAMICCONTAINER(cen, CPlayerEntity, iten) {
-    CPlayerEntity *pen = iten;
+  // Decrease health of each player if it's higher than 50
+  FOREACHINDYNAMICCONTAINER(cen, CEntity, iten) {
+    CPlayerEntity *pen = (CPlayerEntity *)&*iten;
 
-    if (pen == NULL) continue;
+    if (pen->GetHealth() <= 50) continue;
 
-    if (pen->GetHealth() > 50) {
+    #if LINK_CORE_LIB
+      // Send packet to change entity's health
+      CExtEntityHealth pck;
+      pck.ulEntity = pen->en_ulID;
+      pck.fHealth = pen->GetHealth() - 1;
+      pck.SendPacket();
+
+    #else
+      // Change health directly
       pen->SetHealth(pen->GetHealth() - 1);
-    }
+    #endif
   }
 };
 
 void IProcessingEvents::OnFrame(CDrawPort *pdp)
 {
-  // Display patch version in menu
-  if (GetGameAPI()->IsGameOn()) return;
-
-  const FLOAT fScaling = HEIGHT_SCALING(pdp);
-
-  pdp->SetFont(_pfdDisplayFont);
-  pdp->SetTextScaling(fScaling);
-
-  CTString strVersion;
-  strVersion.PrintF("^c00ff00Plugin runs on a %s patch!\n", GetAPI()->GetVersion());
-
-  pdp->PutText(strVersion, 16 * fScaling, 32 * fScaling, 0xFFFFFFFF);
+  // This function is executed after everything in the game is
+  // drawn, so it can draw on top of the menu and the console.
 };

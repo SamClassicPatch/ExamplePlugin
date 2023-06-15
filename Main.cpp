@@ -15,12 +15,19 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
-// Define own pointer to the API
-CCoreAPI *_pCoreAPI = NULL;
+#if !LINK_CORE_LIB
+  // Define own pointer to the API
+  CCoreAPI *_pCoreAPI = NULL;
+#endif
 
 // Plugin event handlers
 static IProcessingEvents _evProcessing;
 static IRenderingEvents _evRendering;
+static INetworkEvents _evNetworking;
+static IGameEvents _evGame;
+static IGameEvents _evDemo;
+static IWorldEvents _evWorldEvents;
+static IListenerEvents _evListeners;
 
 // Dummy chat command
 static void DummyChatCommand(CTString &strResult, const CTString &strArguments) {
@@ -35,7 +42,7 @@ MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
   // Metadata
   pInfo->strAuthor = "Dreamy Cecil";
   pInfo->strName = "Example Plugin";
-  pInfo->strDescription = "This is an example plugin that comes with the source code for the Serious Sam Classics patch.";
+  pInfo->strDescription = "This is an example plugin that comes with the source code for Serious Sam Classics Patch.";
   pInfo->ulVersion = CCoreAPI::MakeVersion(1, 0, 0);
 };
 
@@ -47,6 +54,11 @@ MODULE_API void Module_Startup(void) {
   // Register plugin events
   _evProcessing.Register();
   _evRendering.Register();
+  _evNetworking.Register();
+  _evGame.Register();
+  _evDemo.Register();
+  _evWorldEvents.Register();
+  _evListeners.Register();
 
   // Add custom chat command
   GetPluginAPI()->RegisterChatCommand("dummy", &DummyChatCommand);
@@ -60,4 +72,9 @@ MODULE_API void Module_Shutdown(void) {
   // Unregister plugin events
   _evProcessing.Unregister();
   _evRendering.Unregister();
+  _evNetworking.Unregister();
+  _evGame.Unregister();
+  _evDemo.Unregister();
+  _evWorldEvents.Unregister();
+  _evListeners.Unregister();
 };

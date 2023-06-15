@@ -1,0 +1,82 @@
+/* Copyright (c) 2023 Dreamy Cecil
+This program is free software; you can redistribute it and/or modify
+it under the terms of version 2 of the GNU General Public License as published by
+the Free Software Foundation
+
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
+
+#include "StdH.h"
+
+#define VANILLA_EVENTS_ENTITY_ID
+#include <CoreLib/Compatibility/VanillaEvents.h>
+
+// Define listener events for the plugin
+
+void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
+{
+  // This function is executed every time CEntity::SendEvent() is called
+
+  // Not a player
+  if (!IsDerivedFromClass(pen, "PlayerEntity")) return;
+
+  // Heal a bit every time an enemy is killed
+  if (ee.ee_slEvent == EVENTCODE_EKilledEnemy) {
+    EHealth eeHealth;
+    eeHealth.fHealth = 10.0f;
+    eeHealth.bOverTopHealth = TRUE;
+
+    #if LINK_CORE_LIB
+      // Send packet to give item to an entity
+      CExtEntityItem pck;
+      pck.ulEntity = pen->en_ulID;
+      pck.SetEvent(eeHealth, sizeof(eeHealth));
+      pck.SendPacket();
+
+    #else
+      // Give item directly
+      pen->ReceiveItem(ee);
+    #endif
+  }
+};
+
+void IListenerEvents::OnReceiveItem(CEntity *penPlayer, const CEntityEvent &ee, BOOL bPickedUp)
+{
+  // This function is executed every time CPlayer::ReceiveItem() from the Entities library is called.
+  // If this function isn't defined in the Entities library for the Player class, then it won't work.
+};
+
+void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
+{
+  // This function is executed every time CRationalEntity::Call() is called,
+  // which is happening during procedure logic defined by ES files.
+
+  // Not a player
+  if (!IsDerivedFromClass(pen, "PlayerEntity")) return;
+
+  // Kick the player in the hit direction upon receiving damage from enemies
+  if (ee.ee_slEvent == EVENTCODE_EDamage) {
+    const EDamage &eeDamage = (const EDamage &)ee;
+
+    if (IsDerivedFromClass(eeDamage.penInflictor, "Enemy Base")) {
+      #if LINK_CORE_LIB
+        // Send packet to give impulse to an entity
+        CExtEntityImpulse pck;
+        pck.ulEntity = pen->en_ulID;
+        pck.vSpeed = eeDamage.vDirection * 20.0f;
+        pck.SendPacket();
+
+      #else
+        // Give impulse directly
+        ((CMovableEntity *)pen)->GiveImpulseTranslationAbsolute(eeDamage.vDirection * 20.0f);
+      #endif
+    }
+  }
+};
