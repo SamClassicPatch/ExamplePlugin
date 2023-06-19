@@ -31,3 +31,15 @@ BOOL INetworkEvents::OnClientPacket(CNetworkMessage &nmMessage, const ULONG ulTy
 
   return FALSE;
 };
+
+void INetworkEvents::OnAddPlayer(CPlayerTarget &plt, BOOL bLocal)
+{
+  // Executed each time a new client joins the game and adds their player entities
+  // 'bLocal' is TRUE only if it's a player of a local (connecting) client
+};
+
+void INetworkEvents::OnRemovePlayer(CPlayerTarget &plt, BOOL bLocal)
+{
+  // Executed each time a client leaves the game and removes their player entities
+  // 'bLocal' is TRUE only if it's a player of a local (disconnecting) client
+};
