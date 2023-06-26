@@ -35,15 +35,15 @@ static void DummyChatCommand(CTString &strResult, const CTString &strArguments) 
 };
 
 // Retrieve module information
-MODULE_API void Module_GetInfo(CPluginAPI::PluginInfo *pInfo) {
+MODULE_API void Module_GetInfo(CPluginInfo &info) {
   // Utility flags
-  pInfo->SetUtility(CPluginAPI::PF_ENGINE | CPluginAPI::PF_GAME);
+  info.SetUtility(PLF_ENGINE | PLF_GAME);
 
   // Metadata
-  pInfo->strAuthor = "Dreamy Cecil";
-  pInfo->strName = "Example Plugin";
-  pInfo->strDescription = "This is an example plugin that comes with the source code for Serious Sam Classics Patch.";
-  pInfo->ulVersion = CCoreAPI::MakeVersion(1, 0, 0);
+  info.strAuthor = "Dreamy Cecil";
+  info.strName = "Example Plugin";
+  info.strDescription = "This is an example plugin that comes with the source code for Serious Sam Classics Patch.";
+  info.ulVersion = CCoreAPI::MakeVersion(1, 0, 0);
 };
 
 // Module entry point
