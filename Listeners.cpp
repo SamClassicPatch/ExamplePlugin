@@ -25,15 +25,15 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
   // This function is executed every time CEntity::SendEvent() is called
 
   // Not a player
-  if (!IsDerivedFromClass(pen, "PlayerEntity")) return;
+  if (!IsDerivedFromID(pen, CPlayerEntity_ClassID)) return;
 
   // Heal a bit every time an enemy is killed
-  if (ee.ee_slEvent == EVENTCODE_EKilledEnemy) {
-    EHealth eeHealth;
+  if (ee.ee_slEvent == EVENTCODE_VNL_EKilledEnemy) {
+    VNL_EHealth eeHealth;
     eeHealth.fHealth = 10.0f;
     eeHealth.bOverTopHealth = TRUE;
 
-    #if LINK_CORE_LIB
+    #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
       // Send packet to give item to an entity
       CExtEntityItem pck;
       pck.ulEntity = pen->en_ulID;
@@ -59,14 +59,15 @@ void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
   // which is happening during procedure logic defined by ES files.
 
   // Not a player
-  if (!IsDerivedFromClass(pen, "PlayerEntity")) return;
+  if (!IsDerivedFromID(pen, CPlayerEntity_ClassID)) return;
 
   // Kick the player in the hit direction upon receiving damage from enemies
   if (ee.ee_slEvent == EVENTCODE_EDamage) {
     const EDamage &eeDamage = (const EDamage &)ee;
 
-    if (IsDerivedFromClass(eeDamage.penInflictor, "Enemy Base")) {
-      #if LINK_CORE_LIB
+    // CEnemyBase_ClassID
+    if (IsDerivedFromID(eeDamage.penInflictor, 310)) {
+      #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
         // Send packet to give impulse to an entity
         CExtEntityImpulse pck;
         pck.ulEntity = pen->en_ulID;

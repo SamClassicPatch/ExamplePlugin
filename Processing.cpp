@@ -24,7 +24,7 @@ void IProcessingEvents::OnStep(void)
 
   // Find all player entities
   CEntities cen;
-  IWorld::FindClasses(IWorld::GetWorld()->wo_cenEntities, cen, "PlayerEntity");
+  IWorld::FindClassesByID(IWorld::GetWorld()->wo_cenEntities, cen, CPlayerEntity_ClassID);
 
   // Decrease health of each player if it's higher than 50
   FOREACHINDYNAMICCONTAINER(cen, CEntity, iten) {
@@ -32,7 +32,7 @@ void IProcessingEvents::OnStep(void)
 
     if (pen->GetHealth() <= 50) continue;
 
-    #if LINK_CORE_LIB
+    #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
       // Send packet to change entity's health
       CExtEntityHealth pck;
       pck.ulEntity = pen->en_ulID;

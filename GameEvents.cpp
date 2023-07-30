@@ -23,7 +23,7 @@ void IGameEvents::OnGameStart(void)
 {
   // Find all beheads and replace them with kamikazes
   CEntities cenHeadmen;
-  IWorld::FindClasses(IWorld::GetWorld()->wo_cenEntities, cenHeadmen, "Headman");
+  IWorld::FindClassesByID(IWorld::GetWorld()->wo_cenEntities, cenHeadmen, 303); // CHeadman_ClassID
 
   FOREACHINDYNAMICCONTAINER(cenHeadmen, CEntity, iten) {
     CEntity *pen = iten;
