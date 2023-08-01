@@ -39,6 +39,10 @@ void IGameEvents::OnGameStart(void)
   }
 };
 
+void IGameEvents::OnChangeLevel(void)
+{
+};
+
 void IGameEvents::OnGameStop(void)
 {
 };
