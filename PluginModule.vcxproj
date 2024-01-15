@@ -32,6 +32,7 @@
     <ClCompile Include="Events\Networking.cpp" />
     <ClCompile Include="Events\Processing.cpp" />
     <ClCompile Include="Events\Rendering.cpp" />
+    <ClCompile Include="Events\TimerEvents.cpp" />
     <ClCompile Include="Events\WorldEvents.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StdH.cpp">

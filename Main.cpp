@@ -28,6 +28,7 @@ static IGameEvents _evGame;
 static IGameEvents _evDemo;
 static IWorldEvents _evWorldEvents;
 static IListenerEvents _evListeners;
+static ITimerEvents _evTimerEvents;
 
 // Dummy chat command
 static void DummyChatCommand(CTString &strResult, const CTString &strArguments) {
@@ -59,6 +60,7 @@ MODULE_API void Module_Startup(void) {
   _evDemo.Register();
   _evWorldEvents.Register();
   _evListeners.Register();
+  _evTimerEvents.Register();
 
   // Add custom chat command
   GetPluginAPI()->RegisterChatCommand("dummy", &DummyChatCommand);
@@ -77,4 +79,5 @@ MODULE_API void Module_Shutdown(void) {
   _evDemo.Unregister();
   _evWorldEvents.Unregister();
   _evListeners.Unregister();
+  _evTimerEvents.Unregister();
 };
