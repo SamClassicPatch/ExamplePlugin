@@ -21,7 +21,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 void IGameEvents::OnGameStart(void)
 {
-  // Find all beheads and replace them with kamikazes
+  // This function is executed after starting the simulation for the first time after loading
+  // a level but before adding any of the players (even local server ones). It can be used to
+  // safely modify the level as if it was already played on a little bit and even vanilla clients
+  // will see the changes after connecting to the server (e.g. item replacements).
+
+  // This only works on the very first level started by the game/server and won't work after
+  // changing levels. For that, you have to either use IGameEvents::OnChangeLevel() or replace
+  // both of these functions with code inside IWorldEvents::OnWorldLoad(). But NEITHER of these
+  // methods will work for clients that don't have this plugin downloaded and installed locally,
+  // unless you decide to send built-in extension packets (commands prefixed with "pck_").
+
+  // EXAMPLE: Find all beheads and replace them with kamikazes
   CEntities cenHeadmen;
   IWorld::FindClassesByID(IWorld::GetWorld()->wo_cenEntities, cenHeadmen, 303); // CHeadman_ClassID
 
@@ -41,16 +52,20 @@ void IGameEvents::OnGameStart(void)
 
 void IGameEvents::OnChangeLevel(void)
 {
+  // This function is executed after loading the next level
 };
 
 void IGameEvents::OnGameStop(void)
 {
+  // This function is executed after stopping the game simulation
 };
 
 void IGameEvents::OnGameSave(const CTFileName &fnmSave)
 {
+  // This function is executed right after making a save file
 };
 
 void IGameEvents::OnGameLoad(const CTFileName &fnmSave)
 {
+  // This function is executed right after loading a save file
 };

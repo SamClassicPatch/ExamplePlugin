@@ -13,6 +13,9 @@
       <UniqueIdentifier>{f483e665-b347-4776-8c97-9c8eae695c22}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{e7d35b33-49e4-46d6-a1a8-d3dce8d6a6ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdH.h">
@@ -26,26 +29,26 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Processing.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\GameEvents.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\Listeners.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Listeners.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\Networking.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Networking.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\Processing.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="WorldEvents.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\Rendering.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="GameEvents.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\WorldEvents.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="DemoEvents.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\DemoEvents.cpp">
+      <Filter>Source Files\Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

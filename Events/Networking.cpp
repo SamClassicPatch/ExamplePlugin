@@ -21,12 +21,27 @@ INDEX _ctPacketsReceived = 0;
 
 BOOL INetworkEvents::OnServerPacket(CNetworkMessage &nmMessage, const ULONG ulType)
 {
+  // This function is executed every time a server receives a packet of a new PCK_EXTENSION type with
+  // a specific type that can be handled by the plugin. The packet data starts with the first byte after
+  // the type integer that's already being read by INetDecompress::Integer() and passed as 'ulType'.
+
+  // If this function returns TRUE, it means that this plugin has handled this extension packet and
+  // it won't be processed by other plugins down the list.
+  // If all plugins return FALSE for this type, an error about an invalid packet is shown in console.
   return FALSE;
 };
 
 BOOL INetworkEvents::OnClientPacket(CNetworkMessage &nmMessage, const ULONG ulType)
 {
-  // Count packets sent by the server
+  // This function is executed every time a client receives a packet of a new PCK_EXTENSION type with
+  // a specific type that can be handled by the plugin. The packet data starts with the first byte after
+  // the type integer that's already being read by INetDecompress::Integer() and passed as 'ulType'.
+
+  // If this function returns TRUE, it means that this plugin has handled this extension packet and
+  // it won't be processed by other plugins down the list.
+  // If all plugins return FALSE for this type, an error about an invalid packet is shown in console.
+
+  // EXAMPLE: Count all extension packets sent by the server
   _ctPacketsReceived++;
 
   return FALSE;

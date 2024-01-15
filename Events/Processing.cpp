@@ -19,14 +19,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 void IProcessingEvents::OnStep(void)
 {
-  // Call once every second
+  // This function is executed each simulation tick and is synchronized
+  // with the simulation itself, just like regular entity logic.
+
+  // EXAMPLE: Decrease health of each player if it's higher than 50 every second
   if (ULONG(_pTimer->CurrentTick() * 20) % 20 != 0) return;
 
   // Find all player entities
   CEntities cen;
   IWorld::FindClassesByID(IWorld::GetWorld()->wo_cenEntities, cen, CPlayerEntity_ClassID);
 
-  // Decrease health of each player if it's higher than 50
   FOREACHINDYNAMICCONTAINER(cen, CEntity, iten) {
     CPlayerEntity *pen = (CPlayerEntity *)&*iten;
 

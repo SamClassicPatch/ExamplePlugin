@@ -24,10 +24,9 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
 {
   // This function is executed every time CEntity::SendEvent() is called
 
-  // Not a player
+  // EXAMPLE: Heal a player a bit every time an enemy is killed
   if (!IsDerivedFromID(pen, CPlayerEntity_ClassID)) return;
 
-  // Heal a bit every time an enemy is killed
   if (ee.ee_slEvent == EVENTCODE_VNL_EKilledEnemy) {
     VNL_EHealth eeHealth;
     eeHealth.fHealth = 10.0f;
@@ -50,7 +49,7 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
 void IListenerEvents::OnReceiveItem(CEntity *penPlayer, const CEntityEvent &ee, BOOL bPickedUp)
 {
   // This function is executed every time CPlayer::ReceiveItem() from the Entities library is called.
-  // If this function isn't defined in the Entities library for the Player class, then it won't work.
+  // If it isn't defined in the Entities library for the Player class, this function is never called.
 };
 
 void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
@@ -58,10 +57,9 @@ void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
   // This function is executed every time CRationalEntity::Call() is called,
   // which is happening during procedure logic defined by ES files.
 
-  // Not a player
+  // EXAMPLE: Kick the player in the hit direction upon receiving damage from enemies
   if (!IsDerivedFromID(pen, CPlayerEntity_ClassID)) return;
 
-  // Kick the player in the hit direction upon receiving damage from enemies
   if (ee.ee_slEvent == EVENTCODE_EDamage) {
     const EDamage &eeDamage = (const EDamage &)ee;
 
