@@ -24,6 +24,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 static IProcessingEvents _evProcessing;
 static IRenderingEvents _evRendering;
 static INetworkEvents _evNetworking;
+static IPacketEvents _evPackets;
 static IGameEvents _evGame;
 static IGameEvents _evDemo;
 static IWorldEvents _evWorldEvents;
@@ -57,6 +58,7 @@ MODULE_API void Module_Startup(void) {
   _evProcessing.Register();
   _evRendering.Register();
   _evNetworking.Register();
+  _evPackets.Register();
   _evGame.Register();
   _evDemo.Register();
   _evWorldEvents.Register();
@@ -76,6 +78,7 @@ MODULE_API void Module_Shutdown(void) {
   _evProcessing.Unregister();
   _evRendering.Unregister();
   _evNetworking.Unregister();
+  _evPackets.Unregister();
   _evGame.Unregister();
   _evDemo.Unregister();
   _evWorldEvents.Unregister();

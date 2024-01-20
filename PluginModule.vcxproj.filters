@@ -53,5 +53,8 @@
     <ClCompile Include="Events\TimerEvents.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Events\Packets.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
