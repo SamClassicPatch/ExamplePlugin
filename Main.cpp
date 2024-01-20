@@ -31,8 +31,9 @@ static IListenerEvents _evListeners;
 static ITimerEvents _evTimerEvents;
 
 // Dummy chat command
-static void DummyChatCommand(CTString &strResult, const CTString &strArguments) {
+static BOOL DummyChatCommand(CTString &strResult, INDEX iClient, const CTString &strArguments) {
   strResult.PrintF("Dummy command arguments: '%s'", strArguments);
+  return TRUE;
 };
 
 // Retrieve module information
