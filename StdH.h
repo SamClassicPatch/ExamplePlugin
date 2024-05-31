@@ -25,8 +25,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
   #include <CoreLib/API/CoreAPI.h>
 #endif
 
-// Common functions to use
-#include <CoreLib/Interfaces/RenderFunctions.h>
-#include <CoreLib/Interfaces/WorldFunctions.h>
-
 #include <CoreLib/Networking/ExtPackets.h>

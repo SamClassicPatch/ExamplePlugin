@@ -16,7 +16,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "StdH.h"
 
 #define VANILLA_EVENTS_ENTITY_ID
-#include <CoreLib/Compatibility/VanillaEvents.h>
+#include <Extras/XGizmo/Vanilla/EntityEvents.h>
 
 // Define listener events for the plugin
 
