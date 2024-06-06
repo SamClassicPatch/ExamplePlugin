@@ -13,16 +13,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
-// This switch can be used to toggle direct linkage of the Core library and its features
-#define LINK_CORE_LIB 1
-
-#if LINK_CORE_LIB
-  // Link the library for direct use
-  #include <CoreLib/Core.h>
-
-#else
-  // Utilize the API without linking the library
-  #include <CoreLib/API/CoreAPI.h>
-#endif
+// Link the library for direct use
+#include <CoreLib/Core.h>
 
 #include <CoreLib/Networking/ExtPackets.h>

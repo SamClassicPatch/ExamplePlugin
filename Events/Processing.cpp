@@ -34,7 +34,7 @@ void IProcessingEvents::OnStep(void)
 
     if (pen->GetHealth() <= 50) continue;
 
-    #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
+    #if _PATCHCONFIG_EXT_PACKETS
       // Send packet to change entity's health
       CExtEntityHealth pck;
       pck.ulEntity = pen->en_ulID;

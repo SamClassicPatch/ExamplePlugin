@@ -15,10 +15,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
-#if !LINK_CORE_LIB
-  // Define own pointer to the API
-  CCoreAPI *_pCoreAPI = NULL;
-#endif
+// Define plugin
+CLASSICSPATCH_DEFINE_PLUGIN(k_EPluginFlagEngine | k_EPluginFlagGame, MakeVersion(1, 0, 0),
+  "Dreamy Cecil", "Example Plugin", "This is an example plugin that comes with the source code for Serious Sam Classics Patch.");
 
 // Plugin event handlers
 static IProcessingEvents _evProcessing;
@@ -37,23 +36,9 @@ static BOOL DummyChatCommand(CTString &strResult, INDEX iClient, const CTString 
   return TRUE;
 };
 
-// Retrieve module information
-MODULE_API void Module_GetInfo(CPluginInfo &info) {
-  // Utility flags
-  info.SetUtility(PLF_ENGINE | PLF_GAME);
-
-  // Metadata
-  info.strAuthor = "Dreamy Cecil";
-  info.strName = "Example Plugin";
-  info.strDescription = "This is an example plugin that comes with the source code for Serious Sam Classics Patch.";
-  info.ulVersion = CCoreAPI::MakeVersion(1, 0, 0);
-};
-
 // Module entry point
-MODULE_API void Module_Startup(void) {
-  // Hook pointer to the API
-  HookSymbolAPI();
-  
+CLASSICSPATCH_PLUGIN_STARTUP(void)
+{
   // Register plugin events
   _evProcessing.Register();
   _evRendering.Register();
@@ -66,13 +51,14 @@ MODULE_API void Module_Startup(void) {
   _evTimerEvents.Register();
 
   // Add custom chat command
-  GetPluginAPI()->RegisterChatCommand("dummy", &DummyChatCommand);
+  IChatCommands::Register("dummy", &DummyChatCommand);
 };
 
 // Module cleanup
-MODULE_API void Module_Shutdown(void) {
+CLASSICSPATCH_PLUGIN_SHUTDOWN(void)
+{
   // Remove custom chat command
-  GetPluginAPI()->UnregisterChatCommand("dummy");
+  IChatCommands::Unregister("dummy");
 
   // Unregister plugin events
   _evProcessing.Unregister();

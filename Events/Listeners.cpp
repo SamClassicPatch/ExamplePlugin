@@ -32,7 +32,7 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
     eeHealth.fHealth = 10.0f;
     eeHealth.bOverTopHealth = TRUE;
 
-    #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
+    #if _PATCHCONFIG_EXT_PACKETS
       // Send packet to give item to an entity
       CExtEntityItem pck;
       pck.ulEntity = pen->en_ulID;
@@ -65,7 +65,7 @@ void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
 
     // CEnemyBase_ClassID
     if (IsDerivedFromID(eeDamage.penInflictor, 310)) {
-      #if LINK_CORE_LIB && CLASSICSPATCH_EXT_PACKETS
+      #if _PATCHCONFIG_EXT_PACKETS
         // Send packet to give impulse to an entity
         CExtEntityImpulse pck;
         pck.ulEntity = pen->en_ulID;

@@ -53,7 +53,7 @@ BOOL IPacketEvents::OnChatMessage(INDEX iClient, ULONG ulFrom, ULONG ulTo, CTStr
 {
   // This function is executed every time the server receives a new chat message, addressed from certain
   // players to other players. It can be used to modify the message or be parsed as a specific chat command,
-  // though this is discouraged in favor of the built-in system using CPluginAPI::RegisterChatCommand().
+  // though this is discouraged in favor of the built-in system using IChatCommands::Register().
 
   // If it returns FALSE, it means that the message has been processed as some command
   // and it shouldn't be displayed in chat as a regular message for all clients to see.
