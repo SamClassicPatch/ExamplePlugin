@@ -51,14 +51,14 @@ CLASSICSPATCH_PLUGIN_STARTUP(void)
   _evTimerEvents.Register();
 
   // Add custom chat command
-  IChatCommands::Register("dummy", &DummyChatCommand);
+  ClassicsChat_RegisterCommand("dummy", &DummyChatCommand);
 };
 
 // Module cleanup
 CLASSICSPATCH_PLUGIN_SHUTDOWN(void)
 {
   // Remove custom chat command
-  IChatCommands::Unregister("dummy");
+  ClassicsChat_UnregisterCommand("dummy");
 
   // Unregister plugin events
   _evProcessing.Unregister();
