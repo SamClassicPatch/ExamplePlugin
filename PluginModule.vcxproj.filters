@@ -18,42 +18,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StdH.h">
+    <ClInclude Include="Source\StdH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StdH.cpp">
+    <ClCompile Include="Source\StdH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Events\GameEvents.cpp">
+    <ClCompile Include="Source\Events\GameEvents.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\Listeners.cpp">
+    <ClCompile Include="Source\Events\Listeners.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\Networking.cpp">
+    <ClCompile Include="Source\Events\Networking.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\Processing.cpp">
+    <ClCompile Include="Source\Events\Processing.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\Rendering.cpp">
+    <ClCompile Include="Source\Events\Rendering.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\WorldEvents.cpp">
+    <ClCompile Include="Source\Events\WorldEvents.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\DemoEvents.cpp">
+    <ClCompile Include="Source\Events\DemoEvents.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\TimerEvents.cpp">
+    <ClCompile Include="Source\Events\TimerEvents.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\Packets.cpp">
+    <ClCompile Include="Source\Events\Packets.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
   </ItemGroup>
