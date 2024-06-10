@@ -44,3 +44,7 @@ Debug/
 *.res
 *.lastbuildstate
 *.idb
+*.ncb
+*.opt
+*.plg
+*.ilk
