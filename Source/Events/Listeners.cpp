@@ -35,9 +35,9 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
     #if _PATCHCONFIG_EXT_PACKETS
       // Send packet to give item to an entity
       CExtEntityItem pck;
-      pck.ulEntity = pen->en_ulID;
+      pck("ulEntity", (int)pen->en_ulID);
       pck.SetEvent(eeHealth, sizeof(eeHealth));
-      pck.SendPacket();
+      pck.SendToClients();
 
     #else
       // Give item directly
@@ -68,9 +68,9 @@ void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
       #if _PATCHCONFIG_EXT_PACKETS
         // Send packet to give impulse to an entity
         CExtEntityImpulse pck;
-        pck.ulEntity = pen->en_ulID;
-        pck.vSpeed = eeDamage.vDirection * 20.0f;
-        pck.SendPacket();
+        pck("ulEntity", (int)pen->en_ulID);
+        pck("vSpeed", eeDamage.vDirection * 20.0f);
+        pck.SendToClients();
 
       #else
         // Give impulse directly

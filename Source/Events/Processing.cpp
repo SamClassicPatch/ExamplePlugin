@@ -37,9 +37,9 @@ void IProcessingEvents::OnStep(void)
     #if _PATCHCONFIG_EXT_PACKETS
       // Send packet to change entity's health
       CExtEntityHealth pck;
-      pck.ulEntity = pen->en_ulID;
-      pck.fHealth = pen->GetHealth() - 1;
-      pck.SendPacket();
+      pck("ulEntity", (int)pen->en_ulID);
+      pck("fHealth", pen->GetHealth() - 1);
+      pck.SendToClients();
 
     #else
       // Change health directly
