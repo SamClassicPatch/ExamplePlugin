@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 INDEX _ctPacketsReceived = 0;
 
-BOOL INetworkEvents::OnServerPacket(CNetworkMessage &nmMessage, const ULONG ulType)
+BOOL INetworkEvents_OnServerPacket(CNetworkMessage &nmMessage, const ULONG ulType)
 {
   // This function is executed every time a server receives a packet of a new PCK_EXTENSION type with
   // a specific type that can be handled by the plugin. The packet data starts with the first byte after
@@ -31,7 +31,7 @@ BOOL INetworkEvents::OnServerPacket(CNetworkMessage &nmMessage, const ULONG ulTy
   return FALSE;
 };
 
-BOOL INetworkEvents::OnClientPacket(CNetworkMessage &nmMessage, const ULONG ulType)
+BOOL INetworkEvents_OnClientPacket(CNetworkMessage &nmMessage, const ULONG ulType)
 {
   // This function is executed every time a client receives a packet of a new PCK_EXTENSION type with
   // a specific type that can be handled by the plugin. The packet data starts with the first byte after
@@ -47,13 +47,13 @@ BOOL INetworkEvents::OnClientPacket(CNetworkMessage &nmMessage, const ULONG ulTy
   return FALSE;
 };
 
-void INetworkEvents::OnAddPlayer(CPlayerTarget &plt, BOOL bLocal)
+void INetworkEvents_OnAddPlayer(CPlayerTarget &plt, BOOL bLocal)
 {
   // Executed each time a new client joins the game and adds their player entities
   // 'bLocal' is TRUE only if it's a player of a local (connecting) client
 };
 
-void INetworkEvents::OnRemovePlayer(CPlayerTarget &plt, BOOL bLocal)
+void INetworkEvents_OnRemovePlayer(CPlayerTarget &plt, BOOL bLocal)
 {
   // Executed each time a client leaves the game and removes their player entities
   // 'bLocal' is TRUE only if it's a player of a local (disconnecting) client

@@ -17,17 +17,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define demo events for the plugin
 
-void IDemoEvents::OnDemoPlay(const CTFileName &fnmDemo)
+void IDemoEvents_OnDemoPlay(const CTFileName &fnmDemo)
 {
   // This function is executed upon starting playing a demo
 };
 
-void IDemoEvents::OnDemoStart(const CTFileName &fnmDemo)
+void IDemoEvents_OnDemoStart(const CTFileName &fnmDemo)
 {
   // This function is executed upon starting recording a demo
 };
 
-void IDemoEvents::OnDemoStop(void)
+void IDemoEvents_OnDemoStop(void)
 {
   // This function is executed upon finishing recording a demo
 };

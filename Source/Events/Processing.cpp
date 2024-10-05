@@ -17,7 +17,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define processing events for the plugin
 
-void IProcessingEvents::OnStep(void)
+void IProcessingEvents_OnStep(void)
 {
   // This function is executed each simulation tick and is synchronized
   // with the simulation itself, just like regular entity logic.
@@ -48,7 +48,7 @@ void IProcessingEvents::OnStep(void)
   }
 };
 
-void IProcessingEvents::OnFrame(CDrawPort *pdp)
+void IProcessingEvents_OnFrame(CDrawPort *pdp)
 {
   // This function is executed after everything in the game is
   // drawn, so it can draw on top of the menu and the console.

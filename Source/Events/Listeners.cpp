@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define listener events for the plugin
 
-void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
+void IListenerEvents_OnSendEvent(CEntity *pen, const CEntityEvent &ee)
 {
   // This function is executed every time CEntity::SendEvent() is called
 
@@ -46,13 +46,13 @@ void IListenerEvents::OnSendEvent(CEntity *pen, const CEntityEvent &ee)
   }
 };
 
-void IListenerEvents::OnReceiveItem(CEntity *penPlayer, const CEntityEvent &ee, BOOL bPickedUp)
+void IListenerEvents_OnReceiveItem(CEntity *penPlayer, const CEntityEvent &ee, BOOL bPickedUp)
 {
   // This function is executed every time CPlayer::ReceiveItem() from the Entities library is called.
   // If it isn't defined in the Entities library for the Player class, this function is never called.
 };
 
-void IListenerEvents::OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
+void IListenerEvents_OnCallProcedure(CEntity *pen, const CEntityEvent &ee)
 {
   // This function is executed every time CRationalEntity::Call() is called,
   // which is happening during procedure logic defined by ES files.

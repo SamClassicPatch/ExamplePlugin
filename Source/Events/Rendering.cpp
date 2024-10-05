@@ -17,12 +17,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define rendering events for the plugin
 
-void IRenderingEvents::OnPreDraw(CDrawPort *pdp)
+void IRenderingEvents_OnPreDraw(CDrawPort *pdp)
 {
   // This function is executed before drawing all of the game elements, like the world, HUD and NETRICSA.
 };
 
-void IRenderingEvents::OnPostDraw(CDrawPort *pdp)
+void IRenderingEvents_OnPostDraw(CDrawPort *pdp)
 {
   // This function is executed after drawing all of the game elements, like the world, HUD and NETRICSA.
 
@@ -40,7 +40,7 @@ void IRenderingEvents::OnPostDraw(CDrawPort *pdp)
   pdp->PutText(strMessage, 16 * fScaling, 64 * fScaling, C_WHITE | 255);
 };
 
-void IRenderingEvents::OnRenderView(CWorld &wo, CEntity *penViewer, CAnyProjection3D &apr, CDrawPort *pdp)
+void IRenderingEvents_OnRenderView(CWorld &wo, CEntity *penViewer, CAnyProjection3D &apr, CDrawPort *pdp)
 {
   // This function is executed after rendering the world through global RenderView() method.
 };

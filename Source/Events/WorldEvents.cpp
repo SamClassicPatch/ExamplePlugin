@@ -17,7 +17,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define world events for the plugin
 
-void IWorldEvents::OnWorldLoad(CWorld *pwo, const CTFileName &fnmWorld)
+void IWorldEvents_OnWorldLoad(CWorld *pwo, const CTFileName &fnmWorld)
 {
   // Any changes to the world here will affect its calculated CRC and the default game state, meaning
   // that even if you change something before anyone connects, like via IGameEvents::OnGameStart(),

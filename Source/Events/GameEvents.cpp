@@ -17,7 +17,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define game events for the plugin
 
-void IGameEvents::OnGameStart(void)
+void IGameEvents_OnGameStart(void)
 {
   // This function is executed after starting the simulation for the first time after loading
   // a level but before adding any of the players (even local server ones). It can be used to
@@ -48,22 +48,22 @@ void IGameEvents::OnGameStart(void)
   }
 };
 
-void IGameEvents::OnChangeLevel(void)
+void IGameEvents_OnChangeLevel(void)
 {
   // This function is executed after loading the next level
 };
 
-void IGameEvents::OnGameStop(void)
+void IGameEvents_OnGameStop(void)
 {
   // This function is executed after stopping the game simulation
 };
 
-void IGameEvents::OnGameSave(const CTFileName &fnmSave)
+void IGameEvents_OnGameSave(const CTFileName &fnmSave)
 {
   // This function is executed right after making a save file
 };
 
-void IGameEvents::OnGameLoad(const CTFileName &fnmSave)
+void IGameEvents_OnGameLoad(const CTFileName &fnmSave)
 {
   // This function is executed right after loading a save file
 };

@@ -17,7 +17,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define timer events for the plugin
 
-void ITimerEvents::OnTick(void)
+void ITimerEvents_OnTick(void)
 {
   // This function is executed once every game tick defined by CTimer::TickQuantum interval.
   // It isn't synchonized with the game simulation and will run at the same rate regardless
@@ -26,7 +26,7 @@ void ITimerEvents::OnTick(void)
   // For synchronization with game simulation use IProcessingEvents::OnStep() method instead.
 };
 
-void ITimerEvents::OnSecond(void)
+void ITimerEvents_OnSecond(void)
 {
   // This function is executed once every second (after ITimerEvents::OnTick() on the same tick).
   // It isn't synchonized with the game simulation and will run at the same rate regardless

@@ -17,7 +17,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Define packet events for the plugin
 
-void IPacketEvents::OnCharacterConnect(INDEX iClient, CPlayerCharacter &pc)
+void IPacketEvents_OnCharacterConnect(INDEX iClient, CPlayerCharacter &pc)
 {
   // This function is executed every time a new player connects to the server with a specific character
   // that can be modified here in order to force specific customization onto them (e.g. name or skin).
@@ -27,7 +27,7 @@ void IPacketEvents::OnCharacterConnect(INDEX iClient, CPlayerCharacter &pc)
   strncpy(pps->ps_achModelFile, "BoxerBarry", sizeof(pps->ps_achModelFile));
 };
 
-BOOL IPacketEvents::OnCharacterChange(INDEX iClient, INDEX iPlayer, CPlayerCharacter &pc)
+BOOL IPacketEvents_OnCharacterChange(INDEX iClient, INDEX iPlayer, CPlayerCharacter &pc)
 {
   // This function is executed every time a player wishes to change their player character mid-game
   // that can be modified here in order to force specific customization onto them (e.g. name or skin).
@@ -42,14 +42,14 @@ BOOL IPacketEvents::OnCharacterChange(INDEX iClient, INDEX iPlayer, CPlayerChara
   return TRUE;
 };
 
-void IPacketEvents::OnPlayerAction(INDEX iClient, INDEX iPlayer, CPlayerAction &pa, INDEX iResent)
+void IPacketEvents_OnPlayerAction(INDEX iClient, INDEX iPlayer, CPlayerAction &pa, INDEX iResent)
 {
   // This function is executed every time a player sends new button actions to be applied
   // that can be modified here in order to force a specific action (e.g. knife selection)
   // or restrict certain actions (e.g. toggle third person view if it's currently on).
 };
 
-BOOL IPacketEvents::OnChatMessage(INDEX iClient, ULONG ulFrom, ULONG ulTo, CTString &strMessage)
+BOOL IPacketEvents_OnChatMessage(INDEX iClient, ULONG ulFrom, ULONG ulTo, CTString &strMessage)
 {
   // This function is executed every time the server receives a new chat message, addressed from certain
   // players to other players. It can be used to modify the message or be parsed as a specific chat command,
